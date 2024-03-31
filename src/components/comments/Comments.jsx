@@ -3,9 +3,10 @@
 import Link from "next/link";
 import styles from "./comments.module.css";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 const Comments = () => {
-  const status = "authenticated";
+  const { status } = useSession();
 
   return (
     <div className={styles.container}>
