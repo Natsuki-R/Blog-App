@@ -53,6 +53,16 @@ a {
     padding-right: 80px;
 }
 
+/* styles for ReactQuill */
+.ql-container {
+    font-size: 28px !important;
+}
+
+/* select the blank text area in ReactQuill */
+.quill>.ql-container>.ql-editor.ql-blank::before {
+    color: #b3b3b1;
+}
+
 @media screen and (max-width: 1536px) {
 
     .wrapper {
