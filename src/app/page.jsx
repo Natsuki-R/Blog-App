@@ -12,8 +12,6 @@ export default function Home() {
       <div className={styles.content}>
         <CardList />
         <Menu />
-        {/* <Link href="/">Morning
-    </Link> */}
       </div>
     </div>
   )

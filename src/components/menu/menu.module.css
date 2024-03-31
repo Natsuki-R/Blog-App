@@ -1,0 +1,15 @@
+.container {
+    margin-top: 60px;
+    background-color: #bfa;
+    flex: 2;
+}
+
+.subtitle {
+    color: gray;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.title {
+    font-size: 28px;
+}
