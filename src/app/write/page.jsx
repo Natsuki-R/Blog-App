@@ -1,16 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRouter, useState } from "react";
 import Image from "next/image";
 import "react-quill/dist/quill.bubble.css"; // required 
 import ReactQuill from "react-quill";
 import styles from "./writePage.module.css";
+import { useSession } from "next-auth/react";
 
 const WritePage = () => {
-  const status = "authenticated";
+  const { status } = useSession();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const handleSubmit = () => { };
+
+
+  if (status === "loading") {
+    return <div className={styles.loading}>loading...</div>
+  };
+
+  if (status === "authenticated") {
+    router.push("/")
+  };
+
   return (
     <div className={styles.container}>
       <input
