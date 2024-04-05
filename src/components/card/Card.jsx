@@ -2,28 +2,26 @@ import Image from "next/image";
 import styles from "./card.module.css";
 import Link from "next/link";
 
-const Card = () => {
+const Card = ({ item }) => {
   return (
     <div className={styles.container}>
-      <div className={styles.imageContainer}>
-        <Image src="/culture.png" alt="" fill className={styles.image} />
-      </div>
+      {item.img &&
+        <div className={styles.imageContainer}>
+          <Image src={item.img} alt="" fill className={styles.image} />
+        </div>
+      }
       <div className={styles.textContainer}>
         <div className={styles.detail}>
           <span className={styles.date}>
-            11.02.2023
+            {item.createdAt.substring(0, 10)} -{" "}
           </span>
-          -
-          <span className={styles.category}>CULTURE</span>
+          <span className={styles.category}>{item.catSlug}</span>
         </div>
-        <Link href="/">
-          <h1>Title</h1>
+        <Link href={`/posts/${item.slug}`}>
+          <h1>{item.title}</h1>
         </Link>
-        <p className={styles.desc}>
-          オブザーバビリティについて語るNew Relic社との共催オンラインイベント✨
-          登壇企業各社が抱える課題に対してどのように解決したかを聞くことができます。ご自身が抱える課題の解決策や業務改善のヒントをぜひ収集してください💁‍♂️オブザーバビリティを実施していく上でのポイントもお伝えするので初心者の方にもおススメです！
-        </p>
-        <Link href="/" className={styles.link}>
+        <p className={styles.desc}>{item.desc}</p>
+        <Link href={`/posts/${item.slug}`} className={styles.link}>
           Read More
         </Link>
       </div>

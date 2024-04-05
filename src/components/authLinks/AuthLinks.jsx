@@ -9,7 +9,6 @@ const AuthLinks = () => {
 
   const [open, setOpen] = useState(false)
   const { status } = useSession();
-  // console.log("data", data, "status", status);
 
   return (
     <>
