@@ -10,6 +10,7 @@ const getData = async (page, cat) => {
     });
 
     if (!res.ok) {
+        console.error(`Failed to fetch data. Status: ${res.status}`);
         throw new Error("Failed");
     }
 

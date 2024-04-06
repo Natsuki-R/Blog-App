@@ -25,13 +25,21 @@ const fetcher = async (url) => {
 const Comments = ({ postSlug }) => {
   const { status } = useSession();
   const { data, mutate, isLoading } = useSWR(`http://localhost:3000/api/comments?postSlug=${postSlug}`, fetcher)
-  const [desc, setDesc] = useState("");
+  const [comment, setComment] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async () => {
+    if (comment.trim() === "") { // 检查评论是否为空
+      setError("Comment cannot be empty");
+      return;
+    }
+    setError(""); // 清空错误信息
+
     await fetch("/api/comments", {
       method: "POST",
-      body: JSON.stringify({ desc, postSlug }),
+      body: JSON.stringify({ desc: comment, postSlug }),
     });
+    setComment("");
     mutate();
   };
 
@@ -40,11 +48,15 @@ const Comments = ({ postSlug }) => {
       <h1 className={styles.title}>Comments</h1>
       {status === "authenticated" ? (
         <div className={styles.write}>
-          <textarea
-            placeholder="write a comment..."
-            className={styles.input}
-            onChange={(e) => setDesc(e.target.value)}
-          />
+          <div className={styles.input}>
+            <textarea
+              placeholder="write a comment..."
+              className={styles.textarea}
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
+            {error && <p className={styles.error}>* {error}</p>}
+          </div>
           <button className={styles.button} onClick={handleSubmit}>
             Send
           </button>
